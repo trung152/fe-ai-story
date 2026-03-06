@@ -1,0 +1,273 @@
+/* ─── Design Tokens ──────────────────────────────── */
+:root {
+  --bg: #0a0a0f;
+  --bg-card: #12121a;
+  --bg-card-hover: #1a1a28;
+  --bg-input: #16161f;
+  --border: #2a2a3a;
+  --border-focus: #6c5ce7;
+  --text: #e8e8f0;
+  --text-dim: #8888a0;
+  --text-muted: #555570;
+  --accent: #6c5ce7;
+  --accent-hover: #7c6ef7;
+  --accent-glow: rgba(108, 92, 231, 0.25);
+  --success: #00b894;
+  --danger: #ff6b6b;
+  --gradient: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --transition: 0.2s ease;
+}
+
+/* ─── Reset & Base ────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--accent); text-decoration: none; transition: color var(--transition); }
+a:hover { color: var(--accent-hover); }
+
+/* ─── App Layout ─────────────────────────────────── */
+.app { min-height: 100vh; display: flex; flex-direction: column; }
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 16px 32px;
+  background: rgba(10, 10, 15, 0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+
+.logo { display: inline-flex; align-items: center; gap: 10px; }
+.logo-icon { font-size: 1.4rem; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.logo-text { font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; color: var(--text); }
+
+.app-main { flex: 1; max-width: 800px; width: 100%; margin: 0 auto; padding: 32px 24px 64px; }
+
+/* ─── Page Title ──────────────────────────────────── */
+.page-title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.page-subtitle { color: var(--text-dim); margin-bottom: 32px; font-size: 0.95rem; }
+
+/* ─── Cards ──────────────────────────────────────── */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  transition: all var(--transition);
+}
+
+.card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--accent);
+  box-shadow: 0 0 20px var(--accent-glow);
+  transform: translateY(-2px);
+}
+
+.story-card { display: block; margin-bottom: 16px; cursor: pointer; }
+.story-card h3 { font-family: var(--font-display); font-size: 1.25rem; margin-bottom: 8px; color: var(--text); }
+.story-card .meta { display: flex; gap: 16px; font-size: 0.85rem; color: var(--text-dim); }
+.story-card .meta span { display: flex; align-items: center; gap: 4px; }
+
+/* ─── Buttons ────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.btn-primary {
+  background: var(--gradient);
+  color: white;
+  box-shadow: 0 2px 12px var(--accent-glow);
+}
+
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 20px var(--accent-glow); }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+.btn-secondary {
+  background: var(--bg-card);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover { border-color: var(--accent); background: var(--bg-card-hover); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-dim);
+  padding: 8px 16px;
+}
+
+.btn-ghost:hover { color: var(--text); background: var(--bg-card); }
+
+/* ─── Form ───────────────────────────────────────── */
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; margin-bottom: 6px; font-size: 0.85rem; color: var(--text-dim); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
+
+.form-input,
+.form-textarea,
+.form-select {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 0.95rem;
+  transition: border-color var(--transition);
+  outline: none;
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.form-textarea { min-height: 120px; resize: vertical; line-height: 1.6; }
+
+/* ─── Story Reader ───────────────────────────────── */
+.chapter { margin-bottom: 40px; animation: fadeIn 0.4s ease; }
+.chapter-title { font-family: var(--font-display); font-size: 1.1rem; color: var(--accent); margin-bottom: 12px; font-weight: 600; }
+.chapter-content { white-space: pre-wrap; line-height: 1.9; font-size: 1.05rem; color: var(--text); }
+.chapter-content em { font-style: italic; color: var(--text-dim); }
+
+.load-more-area { text-align: center; padding: 24px 0; }
+
+/* ─── Directions ─────────────────────────────────── */
+.directions { display: flex; flex-direction: column; gap: 12px; margin-top: 24px; }
+
+.direction-btn {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  text-align: left;
+  transition: all var(--transition);
+  font-family: var(--font);
+  color: var(--text);
+  font-size: 0.95rem;
+}
+
+.direction-btn:hover {
+  border-color: var(--accent);
+  background: var(--bg-card-hover);
+  box-shadow: 0 0 16px var(--accent-glow);
+}
+
+.direction-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.direction-label {
+  flex-shrink: 0;
+  padding: 2px 10px;
+  background: var(--accent);
+  color: white;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* ─── Loading ────────────────────────────────────── */
+.loading { text-align: center; padding: 48px 0; color: var(--text-dim); }
+.spinner { display: inline-block; width: 32px; height: 32px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 12px; }
+
+.empty-state {
+  text-align: center;
+  padding: 64px 24px;
+  color: var(--text-dim);
+}
+
+.empty-state p { margin-bottom: 24px; font-size: 1.1rem; }
+
+/* ─── Actions bar ────────────────────────────────── */
+.actions { display: flex; gap: 12px; margin-bottom: 24px; }
+.actions-between { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+
+/* ─── Writing indicator ──────────────────────────── */
+.writing-indicator {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-dim);
+  margin-top: 16px;
+}
+
+.writing-dots span {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  margin: 0 2px;
+  animation: bounce 1.4s ease-in-out infinite;
+}
+
+.writing-dots span:nth-child(2) { animation-delay: 0.16s; }
+.writing-dots span:nth-child(3) { animation-delay: 0.32s; }
+
+/* ─── Toast / Error ──────────────────────────────── */
+.error-msg {
+  padding: 12px 16px;
+  background: rgba(255, 107, 107, 0.1);
+  border: 1px solid var(--danger);
+  border-radius: var(--radius-sm);
+  color: var(--danger);
+  margin-bottom: 16px;
+}
+
+/* ─── Animations ─────────────────────────────────── */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes bounce { 0%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-6px); } }
+
+/* ─── Responsive ─────────────────────────────────── */
+@media (max-width: 640px) {
+  .app-main { padding: 20px 16px 48px; }
+  .page-title { font-size: 1.6rem; }
+  .actions { flex-direction: column; }
+}
